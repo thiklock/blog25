@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.title }} - My Django Blog</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>Published on: {{ post.published_date }}</p>
+    <p>{{ post.text }}</p>
+    <a href="{% url 'post_list' %}">Back to all posts</a>
+</body>
+</html>
