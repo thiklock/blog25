@@ -1,0 +1,13 @@
+{% load random_image %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Image Test</title>
+</head>
+<body>
+    <h1>Testing Random Image</h1>
+    <hr>
+    <img src="{{ get_random_unsplash_or_fallback }}" alt="Random Image">
+</body>
+</html>
