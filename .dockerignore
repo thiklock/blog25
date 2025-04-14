@@ -5,4 +5,5 @@ db.sqlite3
 .gitignore
 blog_env/
 static/th-1779141600.jpg # Assuming this is just for local testing
+*/__pycache__/*
 # Add any other files or directories you want to exclude
