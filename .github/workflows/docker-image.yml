@@ -40,5 +40,5 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            yourdockerhubuser/myblog-app:latest
+            tikkit/myblog-app:latest
           labels: ${{ steps.meta.outputs.labels }}
