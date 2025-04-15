@@ -1,0 +1,52 @@
+# docker-compose.yml (save this in your project root)
+
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile # Specify the Dockerfile for the app
+    container_name: django_blog_app
+    # Volumes to share static and media files with Nginx
+    volumes:
+      - static_volume:/app/staticfiles # Named volume for static files
+      - media_volume:/app/mediafiles   # Named volume for media files
+    expose:
+      - 8000 # Expose port 8000 for Nginx to connect to
+    # If using a .env file for environment variables (recommended)
+    env_file:
+      - .env
+    # Add depends_on if you include a database service in this file
+    # depends_on:
+    #   - db
+    restart: unless-stopped
+
+  nginx:
+    build: ./nginx # Path to the directory containing nginx/Dockerfile and nginx.conf
+    container_name: nginx_proxy
+    # Volumes to access static and media files collected by the 'app' service
+    volumes:
+      - static_volume:/app/staticfiles:ro # Mount static files volume (read-only)
+      - media_volume:/app/mediafiles:ro   # Mount media files volume (read-only)
+    ports:
+      - "80:80" # Map host port 80 to container port 80
+      # Add "443:443" if you configure Nginx for HTTPS
+    depends_on:
+      - app # Nginx should start after the app is ready (though Gunicorn might take time)
+    restart: unless-stopped
+
+  # Optional: PostgreSQL Database Service (Example)
+  # db:
+  #   image: postgres:15-alpine
+  #   container_name: postgres_db
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data/
+  #   env_file:
+  #     - .env # Load POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB from .env
+  #   restart: unless-stopped
+
+volumes:
+  static_volume: # Volume for Django static files
+  media_volume:  # Volume for Django media files
+  # postgres_data: # Volume for PostgreSQL data persistence (if using db service)

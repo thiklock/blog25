@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-3*t33$$_y8+d8=1o7fx+20a97$_e=w)0k^!1&hjx49r%04l0ne
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -130,6 +130,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+#STATIC_ROOT = BASE_DIR / 'staticfiles' # Collect static files here
+STATIC_ROOT = BASE_DIR / 'blog/static'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'   # For user-uploaded files
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
