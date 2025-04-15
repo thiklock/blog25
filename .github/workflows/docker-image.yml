@@ -16,6 +16,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: check env values
+        run: echo "Learning git hub actions"
         run: echo ${{ secrets.DOCKER_USERNAME }}
 
       - name: Log in to Docker Hub
